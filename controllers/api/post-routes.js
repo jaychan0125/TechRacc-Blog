@@ -49,10 +49,9 @@ router.get('/:id', async (req, res) => {
 // CREATE new post, need auth
 router.post('/', withAuth, async (req, res) => {
     try {
-        const newPost = await Post.create({
-            title: req.body.title,
-            content: req.body.content
-        })
+        const newPost = await Post.create(req.body)
+        console.log(newPost)
+        res.status(200).json(newPost)
     } catch (err) {
         res.status(400).json(err);
     }

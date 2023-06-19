@@ -4,14 +4,12 @@ const { User } = require('../../models')
 // localhost:3001/api/users
 
 // CREATE new user
-router.post('/', async (req, res) => {
+router.post('/signup', async (req, res) => {
+    console.log(req.body)
     try {
         // create the user and add it to the database
-        const userData = await User.create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        });
+        const userData = await User.create(req.body);
+        console.log('is it here?')
 
         // signed up, so session is also logged in!
         req.session.save(() => {
@@ -19,7 +17,6 @@ router.post('/', async (req, res) => {
             res.status(200).json(userData);
         });
     } catch (err) {
-        console.log(err);
         res.status(400).json(err);
     }
 });
@@ -35,7 +32,7 @@ router.post('/login', async (req, res) => {
         });
 
         if (!userData) {
-            res.status(400).json({message: 'Incorrect, please try again!'});
+            res.status(400).json({ message: 'Incorrect, please try again!' });
             return;
         }
 
@@ -43,7 +40,7 @@ router.post('/login', async (req, res) => {
         const validatedPass = await userData.validatePassword(req.body.password);
 
         if (!validatedPass) {
-            res.status(400).json({message: 'Incorrect, please try again!'});
+            res.status(400).json({ message: 'Incorrect, please try again!' });
             return;
         }
 
@@ -51,7 +48,7 @@ router.post('/login', async (req, res) => {
         req.session.save(() => {
             req.session.loggedIn = true;
             req.session.user_id = userData.id;
-            res.status(200).json({ user: userData, message: 'You are logged in.'});
+            res.status(200).json({ user: userData, message: 'You are logged in.' });
         })
     } catch (err) {
         console.log(err);

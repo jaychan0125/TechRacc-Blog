@@ -1,8 +1,8 @@
 const newPost = async (event) => {
     event.preventDefault();
 
-    const title = $('#title').value.trim();
-    const content = $('#content').value.trim();
+    const title = $('#title').val().trim();
+    const content = $('#content').val().trim();
 
     if (title && content) {
         const response = await fetch('/api/posts', {
@@ -17,6 +17,7 @@ const newPost = async (event) => {
             alert('Unable to make post.')
         }
     }
+
 };
 
 
@@ -24,3 +25,6 @@ const deletePost = async (event) => {
     // 
 }
 
+
+
+$('#newPost').on('click', newPost);
