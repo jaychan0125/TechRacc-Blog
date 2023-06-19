@@ -11,13 +11,12 @@ const loginForm = async (event) => {
             method: 'POST',
             body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' },
-        }).then(res => res.json())
-        console.log(response, 'logged in')
+        })
 
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace("/");
         } else {
-            alert('Failed login.');
+            alert('Failed login attempt.');
         }
     }
 };

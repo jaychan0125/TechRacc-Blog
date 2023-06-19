@@ -1,7 +1,6 @@
 // signup
 const signupForm = async (event) => {
     event.preventDefault();
-    console.log('what about here?')
 
     const username = $('#username-signup').val().trim();
     const email = $('#email-signup').val().trim();
@@ -13,11 +12,10 @@ const signupForm = async (event) => {
             method: 'POST', 
             body: JSON.stringify({ username, email, password }),
             headers: { 'Content-Type': 'application/json' }
-        }).then(res => res.json())
-        console.log(response, 'signed up')
+        })
         
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace("/");
         } else {
           alert('Failed to sign up.'); 
         }

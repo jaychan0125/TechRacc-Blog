@@ -11,15 +11,16 @@
     </div>
   </div>
 
+  {{#each posts as |post| }}
   <div class="card mx-auto my-5" style="width: 80%">
     <div class="card-body">
-      <h4 class="post-title">Post title</h4>
-      <h5 class="post-author d-flex justify-content-end"> Post author </h5>
+      <h4 class="post-title">{{post.title}}</h4>
+      <h5 class="post-author d-flex justify-content-end">{{post.User.username}}</h5>
       <p class="post-content">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
+        {{post.content}}
       </p>
     </div>
   </div>
+{{/each}}
 
 </div>

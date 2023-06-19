@@ -3,7 +3,7 @@ const { User, Post, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 
-// GET ALL posts and render to homepage. available for everyone
+// Homepage: GET ALL posts and render to homepage. available for everyone
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
@@ -19,16 +19,23 @@ router.get('/', async (req, res) => {
         const posts = postData.map((post) => post.get({ plain: true }));
 
         // pass into template
-        res.render('homepage', { posts });
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
-// LOGIN
+// Login page
 router.get('/login', (req, res) => {
     res.render('login');
 });
+
+// New Post page
+router.get('/newPost', (req, res) => {
+    res.render('newPost', { loggedIn: req.session.loggedIn });
+});
+
+
 
 
 module.exports = router;

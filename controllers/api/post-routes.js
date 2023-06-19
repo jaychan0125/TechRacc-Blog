@@ -47,10 +47,16 @@ router.get('/:id', async (req, res) => {
 });
 
 // CREATE new post, need auth
-router.post('/', withAuth, async (req, res) => {
+router.post('/newPost', withAuth, async (req, res) => {
     try {
-        const newPost = await Post.create(req.body)
-        console.log(newPost)
+        const newPostData = {
+            title: req.body.title, 
+            content: req.body.content,
+            user_id: req.session.user_id  //attach user_id from session
+        };
+
+        const newPost = await Post.create(newPostData);
+
         res.status(200).json(newPost)
     } catch (err) {
         res.status(400).json(err);

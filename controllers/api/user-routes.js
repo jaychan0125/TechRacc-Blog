@@ -5,14 +5,13 @@ const { User } = require('../../models')
 
 // CREATE new user
 router.post('/signup', async (req, res) => {
-    console.log(req.body)
     try {
         // create the user and add it to the database
         const userData = await User.create(req.body);
-        console.log('is it here?')
 
         // signed up, so session is also logged in!
         req.session.save(() => {
+            req.session.user_id = userData.id;
             req.session.loggedIn = true;
             res.status(200).json(userData);
         });
@@ -51,7 +50,6 @@ router.post('/login', async (req, res) => {
             res.status(200).json({ user: userData, message: 'You are logged in.' });
         })
     } catch (err) {
-        console.log(err);
         res.status(400).json(err);
     };
 });
