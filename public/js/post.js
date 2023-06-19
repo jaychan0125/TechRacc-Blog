@@ -25,6 +25,10 @@ const deletePost = async (event) => {
     // 
 }
 
+const updatePost = async (event) => {
+    // 
+}
+
 
 
 $('.post-form').on('submit', newPost);

@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
                 model: User,
                 attributes: ['username']
             }]
-        })
+        });
         res.status(200).json(postData);
     } catch (err) {
         res.status(400).json(err);
@@ -23,7 +23,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     try {
         // find one post by its ID
-        const postData = await Post.findByPk({
+        const postData = await Post.findByPk(req.params.id, {
             include: [
                 // include the username of the user who made the post
                 {
@@ -41,6 +41,14 @@ router.get('/:id', async (req, res) => {
                 }
             ]
         });
+
+        // serialize the data
+        const post = postData.get({ plain: true })
+
+        // pass into template
+        console.log(post)
+        res.render('onePost', { post, loggedIn: req.session.loggedIn });
+
     } catch (err) {
         res.status(400).json(err);
     }
@@ -50,7 +58,7 @@ router.get('/:id', async (req, res) => {
 router.post('/newPost', withAuth, async (req, res) => {
     try {
         const newPostData = {
-            title: req.body.title, 
+            title: req.body.title,
             content: req.body.content,
             user_id: req.session.user_id  //attach user_id from session
         };

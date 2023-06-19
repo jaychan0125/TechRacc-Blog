@@ -25,10 +25,40 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Dashboard: my posts
+router.get('/my-posts', async (req, res) => {
+    try {
+        const postData = await Post.findAll({
+            where: {
+                user_id: req.session.user_id
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['username']
+                }
+            ]
+        });
+
+        // serialize data to js object so the template can read it: 
+        const posts = postData.map((post) => post.get({ plain: true }));
+
+        // pass into template
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
 // Login page
 router.get('/login', (req, res) => {
     res.render('login');
 });
+
+// Signup page
+router.get('/signup', (req, res) => {
+    res.render('signup');
+})
 
 // New Post page
 router.get('/newPost', (req, res) => {

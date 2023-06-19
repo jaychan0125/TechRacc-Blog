@@ -1,24 +1,44 @@
 <div class="container-fluid my-5">
 
-  <div class="card mx-auto" style="width: 80%">
+  <div class="card mx-auto my-5" style="width: 80%">
     <div class="card-body">
-      <h4 class="post-title">Post title</h4>
-      <h5 class="post-author d-flex justify-content-end"> Post author </h5>
-      <p class="post-content">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
+      <h4 class="post-title">{{post.title}}</h4>
+      <h6
+        class="post-author d-flex justify-content-end"
+      >{{post.user.username}}</h6>
+      <p class="post-content">{{post.content}}</p>
     </div>
   </div>
 
-  <div class="card mx-auto my-3" style="width: 60%">
-    <div class="card-body">
-      <h6 class="comment-author">Comment author</h6>
-      <p class="comment-comment">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
+  {{#each comments as |comment|}}
+    <div class="card mx-auto my-3" style="width: 60%">
+      <div class="card-body">
+        <h6 class="comment-author">{{comment.user.username}}</h6>
+        <p class="comment-comment">{{comment.comment}}</p>
+      </div>
     </div>
-  </div>
-  
+  {{/each}}
+
+  {{! if logged in, can add comment: }}
+  {{#if loggedIn}}
+    <div class="card mx-auto my-3" style="width: 60%">
+      <form class="comment-form py-3">
+        <div class="mb-3 mx-auto" style="width: 80%">
+          <label for="comment" class="form-label">Add a comment:</label>
+          <textarea class="form-control" id="comment" rows="2"></textarea>
+        </div>
+
+        <div class="text-center mt-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="newPost"
+          >Comment</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="/js/comment.js"></script>
+  {{/if}}
+
 </div>
