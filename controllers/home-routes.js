@@ -26,8 +26,9 @@ router.get('/', async (req, res) => {
 });
 
 // Dashboard: my posts
-router.get('/my-posts', async (req, res) => {
+router.get('/my-posts', withAuth, async (req, res) => {
     try {
+        const curentUser = req.session.user_id;
         const postData = await Post.findAll({
             where: {
                 user_id: req.session.user_id
@@ -44,7 +45,7 @@ router.get('/my-posts', async (req, res) => {
         const posts = postData.map((post) => post.get({ plain: true }));
 
         // pass into template
-        res.render('homepage', { posts, loggedIn: req.session.loggedIn });
+        res.render('homepage', { posts, loggedIn: req.session.loggedIn, curentUser });
     } catch (err) {
         res.status(400).json(err);
     }

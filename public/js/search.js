@@ -1,17 +1,15 @@
-// nav search bar
-const searchBar = async (event) => {
-    event.preventDefault();
-    console.log('is my console even working?')
+// // nav search bar
+// const searchBar = async (event) => {
+//     event.preventDefault();
 
-    const searchData = $('#search-bar').val().trim();
-    console.log(searchData)
+//     const searchData = $('#search-bar').val().trim();
 
-    if (!searchData) {
-        alert('Nothing searched.')
-    } else {
-        const response = await fetch('/posts')
-    }
+//     if (!searchData) {
+//         alert('Nothing searched.')
+//     } else {
+//         const response = await fetch('/posts')
+//     }
 
-}
+// }
 
-$('.search-bar').on('submit', searchBar);
+// $('.search-bar').on('submit', searchBar);

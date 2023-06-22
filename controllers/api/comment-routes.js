@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 // localhost:3001/api/comments
 
 // newComment
-router.post('/newComment', async (req, res) => {
+router.post('/newComment', withAuth, async (req, res) => {
     try {
         const commentData = {
             comment: req.body.comment,

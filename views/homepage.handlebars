@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  
+
   <div class="card mx-auto my-5" style="width: 80%">
     <div class="card-body">
       <h4 class="post-title">Post title</h4>
@@ -11,16 +11,25 @@
     </div>
   </div>
 
-  {{#each posts as |post| }}
-  <div class="card mx-auto my-5" style="width: 80%">
-    <div class="card-body">
-      <h4 class="post-title"> <a href="/api/posts/{{post.id}}">{{post.title}}</a></h4>
-      <h6 class="post-author d-flex justify-content-end">{{post.user.username}}</h6>
-      <p class="post-content">
-        {{post.content}}
-      </p>
+  {{#each posts as |post|}}
+    <div class="card mx-auto my-5" style="width: 80%">
+      <div class="card-body" >
+        <h4 class="post-title" data-postId={{post.id}}>
+          <a href="/api/posts/{{post.id}}">{{post.title}}</a></h4>
+        <h6
+          class="post-author d-flex justify-content-end"
+        >By {{post.user.username}}, on {{format_date post.date_created}}</h6>
+        <p class="post-content">
+          {{post.content}}
+        </p>
+      </div>
     </div>
-  </div>
-{{/each}}
+  {{/each}}
+
+  {{#if loggedIn}}
+    <div class="mx-auto text-center mb-5">
+      <a class="btn btn-primary" href="/newPost" role="button">Add New Post</a>
+    </div>
+  {{/if}}
 
 </div>
