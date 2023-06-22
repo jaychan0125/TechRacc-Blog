@@ -5,12 +5,15 @@ const withAuth = require('../../utils/auth');
 // localhost:3001/api/comments
 
 // newComment
-router.post('newComment', withAuth, async (req, res) => {
+router.post('/newComment', async (req, res) => {
     try {
-        const newComment = await Comment.create({
-            ...req.body,
-            post_id: req.body.post_id
-        }, {
+        const commentData = {
+            comment: req.body.comment,
+            post_id: req.body.postId,
+            user_id: req.session.user_id  //attach user_id from session
+        }
+        
+        const newComment = await Comment.create(commentData, {
             include: [
                 {
                     model: User,
@@ -28,3 +31,4 @@ router.post('newComment', withAuth, async (req, res) => {
     }
 });
 
+module.exports = router;

@@ -33,6 +33,7 @@ router.get('/:id', async (req, res) => {
                 {
                     // include comments associated with the post
                     model: Comment,
+                    attributes: ['comment'],
                     include: [{
                         // include the username of the user who made the comment
                         model: User,
@@ -46,7 +47,6 @@ router.get('/:id', async (req, res) => {
         const post = postData.get({ plain: true })
 
         // pass into template
-        console.log(post)
         res.render('onePost', { post, loggedIn: req.session.loggedIn });
 
     } catch (err) {
