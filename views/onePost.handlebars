@@ -12,7 +12,9 @@
     {{! if loggedIn and postuser matches loggedIn user:  }}
     {{!-- {{#if (eq post.user.id currentUser)}} --}}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end pe-3 pb-3">
-      <button type="button" class="btn btn-primary btn-sm" id="">Update</button>
+      {{!-- HERE IS BUTTON TO EDIT --}}
+      <a class="btn btn-primary btn-sm" href="/api/posts/{{post.id}}/edit" role="button" id="edit-post">Edit</a>
+      
       <button
         type="button"
         class="btn btn-secondary btn-sm"

@@ -32,7 +32,7 @@ const deletePost = async (event) => {
         });
 
         if (response.ok) {
-            document.location.replace("/my-posts",);
+            document.location.replace("/my-posts");
         } else {
             alert('Failed to delete post.')
         }
@@ -43,18 +43,21 @@ const deletePost = async (event) => {
 
 const updatePost = async (event) => {
     event.preventDefault();
-    const postId = $('.post-title').attr('data-postId');
+    const postId = $('#title').attr('data-postId');
 
-// HOW DO I MAKE IT SO THE FORM IS OPEN SO I CAN UPDATE IT IF I WANNA?!
+    const title = $('#title').val().trim();
+    const content = $('#content').val().trim();
 
+    if (title && content) {
     try {
         const response = await fetch(`/api/posts/${postId}`, {
             method: 'PUT',
+            body: JSON.stringify({ title, content }),
+            headers: { 'Content-Type': 'application/json' }
         });
 
         if (response.ok) {
-            console.log(response)
-            // document.location.replace("/my-posts",);
+            document.location.replace("/my-posts");
         } else {
             alert('Failed to delete post.')
         }
@@ -62,6 +65,7 @@ const updatePost = async (event) => {
     } catch (err) {
         console.error(err)
     }
+}
 };
 
 

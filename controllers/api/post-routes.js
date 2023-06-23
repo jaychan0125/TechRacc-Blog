@@ -33,7 +33,6 @@ router.get('/:id', async (req, res) => {
                 {
                     // include comments associated with the post
                     model: Comment,
-                    attributes: ['comment'],
                     include: [{
                         // include the username of the user who made the comment
                         model: User,
@@ -66,6 +65,37 @@ router.post('/newPost', withAuth, async (req, res) => {
         const newPost = await Post.create(newPostData);
 
         res.status(200).json(newPost)
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
+
+// update page: 
+router.get('/:id/edit', withAuth, async (req, res) => {
+    try {
+        // find one post by its ID
+        const postData = await Post.findByPk(req.params.id, {
+            include: [
+                // include the username of the user who made the post
+                {
+                    model: User,
+                    attributes: ['username']
+                },
+                {
+                    // include comments associated with the post
+                    model: Comment,
+                    include: [{
+                        // include the username of the user who made the comment
+                        model: User,
+                        attributes: ['username']
+                    }]
+                }
+            ]
+        });
+
+        // serialize the data
+        const post = postData.get({ plain: true })
+        res.render('editPost', { post, loggedIn: req.session.loggedIn });
     } catch (err) {
         res.status(400).json(err);
     }

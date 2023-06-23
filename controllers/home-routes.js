@@ -66,7 +66,10 @@ router.get('/newPost', (req, res) => {
     res.render('newPost', { loggedIn: req.session.loggedIn });
 });
 
-
+// // Update Post page
+// router.get('/editPost', (req, res) => {
+//     res.render('editPost', { loggedIn: req.session.loggedIn })
+// });
 
 
 module.exports = router;

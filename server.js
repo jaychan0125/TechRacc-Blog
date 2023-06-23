@@ -14,6 +14,12 @@ const PORT = process.env.PORT || 3001;
 // Set up sessions
 const sess = {
   secret: 'Super secret session',
+  cookie: {
+    maxAge: 600000, //timeout after 10mins inactivity (it is set as 'last interaction' +10min)
+    httpOnly: true,
+    secure: false,
+    sameSite: 'strict',
+  },
   resave: false,
   saveUninitialized: true,
 };

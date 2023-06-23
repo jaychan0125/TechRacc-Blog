@@ -1,0 +1,30 @@
+<div class="container-fluid pt-3">
+  <form class="post-form">
+
+    <div class="mb-3 mx-auto" style="width: 80%">
+      <label for="title" class="form-label">Post Title</label>
+      <input
+        type="input"
+        class="form-control"
+        data-postId={{post.id}}
+        id="title"
+        value="{{post.title}}"
+      />
+    </div>
+
+    <div class="mb-3 mx-auto" style="width: 80%">
+      <label for="content" class="form-label">Post Content</label>
+      <textarea
+        class="form-control"
+        id="content"
+        rows="5"
+      >{{post.content}}</textarea>
+    </div>
+
+    <div class="text-center mt-3">
+      <button type="submit" class="btn btn-primary" id="post-update">Update Post</button>
+    </div>
+  </form>
+</div>
+
+<script src="/js/post.js"></script>
