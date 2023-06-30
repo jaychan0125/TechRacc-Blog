@@ -2,15 +2,16 @@
 
   {{#each posts as |post|}}
     <div class="card mx-auto my-5" style="width: 80%">
-      <div class="card-body" >
+      <div class="card-body">
         <h4 class="post-title" data-postId={{post.id}}>
           <a href="/api/posts/{{post.id}}">{{post.title}}</a></h4>
-        <h6
-          class="post-author d-flex justify-content-end"
-        >By {{post.user.username}}, on {{format_date post.date_created}}</h6>
+        <h6 class="post-author d-flex justify-content-end">By
+          {{post.user.username}}, on
+          {{format_date post.date_created}}</h6>
         <p class="post-content">
           {{post.content}}
         </p>
+
       </div>
     </div>
   {{/each}}

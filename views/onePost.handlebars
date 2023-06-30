@@ -10,26 +10,31 @@
     </div>
 
     {{! if loggedIn and postuser matches loggedIn user:  }}
-    {{!-- {{#if (eq post.user.id currentUser)}} --}}
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end pe-3 pb-3">
-      {{!-- HERE IS BUTTON TO EDIT --}}
-      <a class="btn btn-primary btn-sm" href="/api/posts/{{post.id}}/edit" role="button" id="edit-post">Edit</a>
-      
-      <button
-        type="button"
-        class="btn btn-secondary btn-sm"
-        id="post-delete"
-      >Delete</button>
-    </div>
+    {{#if matching}}
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end pe-3 pb-3">
+        {{! HERE IS BUTTON TO EDIT }}
+        <a
+          class="btn btn-primary btn-sm"
+          href="/api/posts/{{post.id}}/edit"
+          role="button"
+          id="edit-post"
+        >Edit</a>
 
-    {{!-- {{/if}} --}}
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          id="post-delete"
+        >Delete</button>
+      </div>
+    {{/if}}
 
   </div>
 
   {{#each post.comments as |comment|}}
     <div class="card mx-auto my-3" style="width: 70%">
       <div class="card-body">
-        <h6 class="comment-author">{{comment.user.username}}, on {{format_date comment.date_created}}</h6>
+        <h6 class="comment-author">{{comment.user.username}}, on
+          {{format_date comment.date_created}}</h6>
         <p class="comment-comment">{{comment.comment}}</p>
       </div>
     </div>

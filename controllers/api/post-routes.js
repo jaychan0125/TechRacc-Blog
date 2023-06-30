@@ -44,9 +44,12 @@ router.get('/:id', async (req, res) => {
 
         // serialize the data
         const post = postData.get({ plain: true })
-
+        let matching = false;
+        if(req.session.user_id === post.user_id) {
+            matching = true
+        }
         // pass into template
-        res.render('onePost', { post, loggedIn: req.session.loggedIn });
+        res.render('onePost', { post, loggedIn: req.session.loggedIn, matching });
 
     } catch (err) {
         res.status(400).json(err);
