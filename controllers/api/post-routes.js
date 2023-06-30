@@ -104,11 +104,6 @@ router.get('/:id/edit', withAuth, async (req, res) => {
 // UPDATE post 
 router.put('/:id', withAuth, async (req, res) => {
     try {
-        /* req.body should look like: 
-        {
-        "title": "updated title", 
-        "content": "updated content"
-        } */
         const updatedPost = await Post.update(req.body, {
             where: {
                 id: req.params.id,
