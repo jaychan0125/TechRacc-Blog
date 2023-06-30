@@ -24,7 +24,6 @@ const newPost = async (event) => {
 const deletePost = async (event) => {
     event.preventDefault();
     const postId = $('.post-title').attr('data-postId');
-    console.log(postId);
 
     try {
         const response = await fetch(`/api/posts/${postId}`, {
